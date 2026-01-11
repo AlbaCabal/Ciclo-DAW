@@ -1,0 +1,75 @@
+# --- VARIABLES DE ENTORNO EN WINDOWS 11 ---
+
+#Comando utilizado
+dir env:
+# Resultado de comando
+Name                           Value
+----                           -----
+ALLUSERSPROFILE                C:\ProgramData
+APPDATA                        C:\Users\avera\AppData\Roaming
+CommonProgramFiles             C:\Program Files\Common Files
+CommonProgramFiles(x86)        C:\Program Files (x86)\Common Files
+CommonProgramW6432             C:\Program Files\Common Files
+COMPUTERNAME                   AVERACLI1
+ComSpec                        C:\WINDOWS\system32\cmd.exe
+DriverData                     C:\Windows\System32\Drivers\DriverData
+EFC_5548                       1
+HOMEDRIVE                      C:
+HOMEPATH                       \Users\avera
+LOCALAPPDATA                   C:\Users\avera\AppData\Local
+LOGONSERVER                    \\AVERACLI1
+NUMBER_OF_PROCESSORS           4
+OS                             Windows_NT
+Path                           C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerSh...
+PATHEXT                        .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+PROCESSOR_ARCHITECTURE         AMD64
+PROCESSOR_IDENTIFIER           AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD
+PROCESSOR_LEVEL                25
+PROCESSOR_REVISION             7502
+ProgramData                    C:\ProgramData
+ProgramFiles                   C:\Program Files
+ProgramFiles(x86)              C:\Program Files (x86)
+ProgramW6432                   C:\Program Files
+PSModulePath                   C:\Users\avera\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modu...
+PUBLIC                         C:\Users\Public
+SESSIONNAME                    Console
+SystemDrive                    C:
+SystemRoot                     C:\WINDOWS
+TEMP                           C:\Users\avera\AppData\Local\Temp
+TMP                            C:\Users\avera\AppData\Local\Temp
+USERDOMAIN                     AVERACLI1
+USERDOMAIN_ROAMINGPROFILE      AVERACLI1
+USERNAME                       avera
+USERPROFILE                    C:\Users\avera
+windir                         C:\WINDOWS
+
+
+# * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * 
+
+#Comando utilizado
+$env:HOMEPATH
+# Resultado de comando
+\Users\avera
+
+# * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * 
+
+#Comando utilizado
+$env:USERNAME
+# Resultado de comando
+avera
+
+# * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * 
+
+#Comando utilizado
+$env:USERDOMAIN
+# Resultado de comando
+AVERACLI1
+
+# * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * 
+
+#Comando utilizado
+$env:SystemDrive
+# Resultado de comando
+C:
+
+# * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * 
