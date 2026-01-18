@@ -1,0 +1,21 @@
+nombre,descripcion
+1eso-gr, Grupo de 1o de la ESO
+2eso-gr, Grupo de 2o de la ESO
+3eso-gr, Grupo de 3o de la ESO
+4eso-gr, Grupo de 4o de la ESO
+1bach-gr, Grupo de 1o de Bachillerato
+2bach-gr, Grupo de 2o de Bachillerato
+1daw-gr, Grupo de 1o de CFGS DAW
+R_1ESO, Grupo para leer en carpeta 1ESO
+RW_1ESO, Grupo para leer y escribir en carpeta 1ESO
+R_2ESO, Grupo para leer en carpeta 2ESO
+RW_2ESO, Grupo para leer y escribir en carpeta 2ESO
+R_3ESO, Grupo para leer en carpeta 3ESO
+RW_3ESO, Grupo para leer y escribir en carpeta 3ESO
+R_4ESO, Grupo para leer en carpeta 4ESO
+RW_4ESO, Grupo para leer y escribir en carpeta 4ESO
+R_1BACH, Grupo para leer en carpeta 1BACH
+RW_1BACH, Grupo para leer y escribir en carpeta 1BACH
+R_2BACH, Grupo para leer en carpeta 2BACH
+RW_2BACH, Grupo para leer y escribir en carpeta 2BACH
+RW_1DAW, Grupo para leer y escribir en carpeta 1DAW
