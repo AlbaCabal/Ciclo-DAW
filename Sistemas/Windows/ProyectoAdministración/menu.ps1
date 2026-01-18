@@ -24,7 +24,7 @@ function crearUsersYGrupos
   $fileUsersCsv=Read-Host cuentas.csv   
   $file_Users = Get-Content $fileUsersCsv
   foreach($linea in $file_Users) {
-    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /V po"/T" REG_DWORD "/D" 0
+    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /V $linea "/T" REG_DWORD "/D" 0
   }
 
 
@@ -45,9 +45,6 @@ function crearUsersYGrupos
   # Modificación de herencia de permisos y dado permisos especificos a las carpetas
   $file_groups=Import-Csv -Path permisos.csv
   foreach ($group in $file_groups) {
-
-    icacls $group.ruta /reset /T
-
     icacls $group.ruta /inheritance:d /T
 
     icacls $group.ruta /remove:g Usuarios
