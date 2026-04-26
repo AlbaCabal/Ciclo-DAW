@@ -1,0 +1,6 @@
+Name*Path*Description*Category*Scope
+SI-GG-DepInformatica*OU=Dep-Informatica,dc=altamira,dc=mylocal*Grupo global y de seguridad del Dep.Informatica*Security*Global
+SI-GG-DepDatos*OU=Dep-Datos,dc=altamira,dc=mylocal*Grupo global y de seguridad del Dep.Datos*Security*Global
+SI-GG-DepGerencia*OU=Dep-Gerencia,dc=altamira,dc=mylocal*Grupo global y de seguridad del Dep.Gerencia*Security*Global
+SI-GG-DepSoporte*OU=Dep-Soporte,dc=altamira,dc=mylocal*Grupo global y de seguridad del Dep.Soporte*Security*Global
+SI-GG-Teletrabajo*OU=Grupos,DC=altamira,DC=mylocal*Grupo global de usuarios en teletrabajo*Security*Global

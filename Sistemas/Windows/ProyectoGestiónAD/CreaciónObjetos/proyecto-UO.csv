@@ -1,0 +1,6 @@
+Name*Description*Path
+Dep-Datos*UO Dep. Datos*dc=altamira,dc=mylocal
+Dep-Gerencia*UO Dep. Gerencia*dc=altamira,dc=mylocal
+Dep-Soporte*UO Dep. Soporte*dc=altamira,dc=mylocal
+Dep-Informatica*UO Dep. Informatica*dc=altamira,dc=mylocal
+Grupos*UO para almacenar grupos adicionales del dominio*DC=altamira,DC=mylocal
