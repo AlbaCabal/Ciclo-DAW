@@ -1,0 +1,197 @@
+PS C:\WINDOWS\system32> gpresult /scope computer /v
+
+Herramienta de resultados para la Directiva de grupos del
+sistema operativo Microsoft (R) Windows (R) v2.0
+© Microsoft Corporation. Todos los derechos reservados.
+
+Creado el ‎04/‎05/‎2026 a las 20:50:07
+
+
+RSOP datos para  en W11-DATOS-01 : modo de inicio de sesión
+------------------------------------------------------------
+
+Configuración del sistema operativo: Estación de trabajo miembro
+Versión del sistema operativo:       10.0.26100
+Nombre de sitio:                   Default-First-Site-Name
+Perfil móvil:
+Perfil local:
+¿Conectado a un vínculo de baja velocidad?: No
+
+
+CONFIGURACIÓN DE EQUIPO
+------------------------
+    CN=W11-Datos-01,OU=Dep-Datos,DC=altamira,DC=mylocal
+    Última vez que se aplicó la Directiva de grupo: 04/05/2026 a las 20:42:20
+    Directivas de grupo aplicadas desdemaster-altamira.altamira.mylocal
+    Umbral del vínculo de baja velocidad de las Directivas de grupo:500 kbps
+    Nombre de dominio:                   ALTAMIRA
+    Tipo de dominio:                     Windows 2008 o posterior
+
+    Objetos de directiva de grupo aplicados
+    ----------------------------------------
+        Default Domain Policy
+        Directiva de grupo local
+
+    El equipo es miembro de los grupos de seguridad siguientes
+    ----------------------------------------------------------
+        Administradores
+        Todos
+        Usuarios
+        NT AUTHORITY\NETWORK
+        Usuarios autentificados
+        Esta compañía
+        W11-Datos-01$
+        Equipos del dominio
+        Identidad afirmada de la autoridad de autenticación
+        Nivel obligatorio del sistema
+
+    Conjunto resultante de directivas para el equipo
+    -------------------------------------------------
+
+        Instalaciones de software
+        -------------------------
+            n/a
+
+        Scripts de inicio
+        -----------------
+            n/a
+
+        Scripts de apagado
+        ------------------
+            n/a
+
+        Directivas de cuenta
+        --------------------
+            GPO: Default Domain Policy
+                Directiva:            LockoutDuration
+                Configuración de equipo:  4294967295
+
+            GPO: Default Domain Policy
+                Directiva:            MaximumPasswordAge
+                Configuración de equipo:  45
+
+            GPO: Default Domain Policy
+                Directiva:            MinimumPasswordAge
+                Configuración de equipo:  1
+
+            GPO: Default Domain Policy
+                Directiva:            ResetLockoutCount
+                Configuración de equipo:  10
+
+            GPO: Default Domain Policy
+                Directiva:            LockoutBadCount
+                Configuración de equipo:  2
+
+            GPO: Default Domain Policy
+                Directiva:            PasswordHistorySize
+                Configuración de equipo:  3
+
+            GPO: Default Domain Policy
+                Directiva:            MinimumPasswordLength
+                Configuración de equipo:  10
+
+        Directiva de auditoría
+        ----------------------
+            n/a
+
+        Derechos de usuario
+        -------------------
+            n/a
+
+        Opciones de seguridad
+        ---------------------
+            GPO: Default Domain Policy
+                Directiva:            PasswordComplexity
+                Configuración de equipo:  Habilitada
+
+            GPO: Default Domain Policy
+                Directiva:            ClearTextPassword
+                Configuración de equipo:  No habilitado
+
+            GPO: Default Domain Policy
+                Directiva:            ForceLogoffWhenHourExpire
+                Configuración de equipo:  No habilitado
+
+            GPO: Default Domain Policy
+                Directiva:            RequireLogonToChangePassword
+                Configuración de equipo:  No habilitado
+
+            GPO: Default Domain Policy
+                Directiva:            AllowAdministratorLockout
+                Configuración de equipo:  No habilitado
+
+            GPO: Default Domain Policy
+                Directiva:            LSAAnonymousNameLookup
+                Configuración de equipo:  No habilitado
+
+            GPO: Default Domain Policy
+                Directiva:            @wsecedit.dll,-59155
+                Nombre del valor:         MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\InactivityTimeoutSecs
+                Configuración de equipo:  300
+
+            GPO: Default Domain Policy
+                Directiva:            @wsecedit.dll,-59058
+                Nombre del valor:         MACHINE\System\CurrentControlSet\Control\Lsa\NoLMHash
+                Configuración de equipo:  1
+
+        Configuración del registro de eventos
+        -------------------------------------
+            n/a
+
+        Grupos restringidos
+        -------------------
+            n/a
+
+        Servicios del sistema
+        ---------------------
+            n/a
+
+        Configuración de Registro
+        --------------------------
+            n/a
+
+        Configuración del sistema de archivos
+        -------------------------------------
+            n/a
+
+        Directivas de clave pública
+        ---------------------------
+            n/a
+
+        Plantillas administrativas
+        --------------------------
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\UseTPMKey
+                Valor:       2, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\UseTPMPIN
+                Valor:       2, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\UseTPMKeyPIN
+                Valor:       2, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\UseTPM
+                Valor:       2, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\EnableBDEWithNoTPM
+                Valor:       0, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Default Domain Policy
+                Id. de carpeta: Software\Policies\Microsoft\Windows\RemovableStorageDevices\Deny_All
+                Valor:       1, 0, 0, 0
+                Estado:       Habilitada
+
+            GPO: Directiva de grupo local
+                Id. de carpeta: SOFTWARE\Policies\Microsoft\FVE\UseAdvancedStartup
+                Valor:       1, 0, 0, 0
+                Estado:       Habilitada
+PS C:\WINDOWS\system32>
