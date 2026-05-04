@@ -1,0 +1,108 @@
+PS C:\WINDOWS\system32> gpresult /scope user /v
+
+Herramienta de resultados para la Directiva de grupos del
+sistema operativo Microsoft (R) Windows (R) v2.0
+© Microsoft Corporation. Todos los derechos reservados.
+
+Creado el ‎04/‎05/‎2026 a las 7:29:20
+
+
+RSOP datos para ALTAMIRA\JALBAC en W11-DATOS-01 : modo de inicio de sesión
+---------------------------------------------------------------------------
+
+Configuración del sistema operativo: Estación de trabajo miembro
+Versión del sistema operativo:       10.0.26100
+Nombre de sitio:                   n/a
+Perfil móvil:             n/a
+Perfil local:                        C:\Users\JALBAC
+¿Conectado a un vínculo de baja velocidad?: No
+
+
+CONFIGURACIÓN DE USUARIO
+-------------------------
+    CN=JALBAC,OU=Dep-Gerencia,DC=altamira,DC=mylocal
+    Última vez que se aplicó la Directiva de grupo: 04/05/2026 a las 6:59:34
+    Directivas de grupo aplicadas desdemaster-altamira.altamira.mylocal
+    Umbral del vínculo de baja velocidad de las Directivas de grupo:500 kbps
+    Nombre de dominio:                   ALTAMIRA
+    Tipo de dominio:                     Windows 2008 o posterior
+
+    Objetos de directiva de grupo aplicados
+    ----------------------------------------
+        script Logon
+        Default Domain Policy
+
+    Los objetos GPO siguientes no se aplicaron porque fueron filtrados
+    -------------------------------------------------------------------
+        Directiva de grupo local
+            Filtrar:  No aplicado (vacío)
+
+    El usuario es parte de los siguientes Grupos de seguridad
+    ---------------------------------------------------------
+        Usuarios del dominio
+        Todos
+        Usuarios
+        NT AUTHORITY\INTERACTIVE
+        INICIO DE SESIÓN EN LA CONSOLA
+        Usuarios autentificados
+        Esta compañía
+        LOCAL
+        SI-GG-DepGerencia
+        Identidad afirmada de la autoridad de autenticación
+        Nivel obligatorio medio
+
+    El usuario tiene los siguientes privilegios de seguridad
+    --------------------------------------------------------
+
+
+    Conjunto resultante de directivas para el usuario
+    --------------------------------------------------
+
+        Instalaciones de software
+        -------------------------
+            n/a
+
+        Scripts de inicio de sesión
+        ---------------------------
+            GPO: script Logon
+                Nombre:         \\altamira.mylocal\SYSVOL\altamira.mylocal\scripts\login.bat
+                Parámetros:
+                Último_ejecutado: 04/05/2026 a las 07:45:12.
+
+        Scripts de cierre de sesión
+        ---------------------------
+        Directivas de clave pública
+        ---------------------------
+            n/a
+
+        Plantillas administrativas
+        --------------------------
+            GPO: Default Domain Policy
+                Id. de carpeta: Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoControlPanel
+                Valor:       1, 0, 0, 0
+                Estado:       Habilitada
+
+        Redirección de carpetas
+        -----------------------
+            n/a
+
+        Interfaz de usuario de la búsqueda de Internet Explorer
+        -------------------------------------------------------
+            n/a
+
+        Conexión de Internet Explorer
+        -----------------------------
+            n/a
+
+        Direcciones URL de Internet Explorer
+        ------------------------------------
+            n/a
+
+        Seguridad de Internet Explorer
+        ------------------------------
+            n/a
+
+        Programas de Internet Explorer
+        ------------------------------
+            n/a
+PS C:\WINDOWS\system32>
