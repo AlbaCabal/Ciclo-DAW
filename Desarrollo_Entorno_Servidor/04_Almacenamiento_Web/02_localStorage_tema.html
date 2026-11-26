@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage - Persistencia de Tema</title>
+    <style>
+        .dark-theme { background-color: #121212; color: #f5f5f5; }
+        #tarjeta-perfil { border: 1px solid #888; padding: 15px; width: 300px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Persistencia con localStorage</h1>
+    <button id="btn-tema-global">Alternar Modo Oscuro (Body)</button>
+    <button id="btn-tema-tarjeta">Color Aleatorio Tarjeta (Guardado)</button>
+
+    <div id="tarjeta-perfil">
+        <h2 id="nombre-usuario">Juan Pérez</h2>
+        <p>Este bloque recuerda su color aunque recargues la página (F5).</p>
+    </div>
+
+    <script>
+        // 1. Modo oscuro global con classList y localStorage
+        const btnTemaGlobal = document.getElementById('btn-tema-global');
+        document.body.className = localStorage.getItem('tema_body') || '';
+
+        btnTemaGlobal.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('tema_body', document.body.className);
+        });
+
+        // 2. Guardar múltiples claves (background y color) para la tarjeta
+        const tarjeta = document.getElementById('tarjeta-perfil');
+        const nombre = document.getElementById('nombre-usuario');
+
+        function cargarTemaTarjeta() {
+            const color = localStorage.getItem("color_tarjeta");
+            const fondo = localStorage.getItem("background_tarjeta");
+            if (color && fondo) {
+                nombre.style.background = fondo;
+                nombre.style.color = color;
+                tarjeta.style.background = fondo;
+                tarjeta.style.color = color;
+            }
+        }
+
+        document.getElementById('btn-tema-tarjeta').addEventListener('click', () => {
+            const arrayFondo = ["lightgreen", "lightpink", "lightgoldenrodyellow", "lightblue", "lightsalmon"];
+            const arrayColor = ["purple", "red", "saddlebrown", "darkblue", "darkred"];
+            const random = Math.floor(Math.random() * arrayFondo.length);
+
+            localStorage.setItem("background_tarjeta", arrayFondo[random]);
+            localStorage.setItem("color_tarjeta", arrayColor[random]);
+            cargarTemaTarjeta();
+        });
+
+        // Al arrancar la página restauramos el tema guardado
+        cargarTemaTarjeta();
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Guardar ambos colores en un único JSON en localStorage
+           -------------------------------------------------------------------------
+           // Guardar: localStorage.setItem("estilo", JSON.stringify({ fondo: "pink", color: "red" }));
+           // Leer:    const estilo = JSON.parse(localStorage.getItem("estilo"));
+        */
+    </script>
+</body>
+</html>

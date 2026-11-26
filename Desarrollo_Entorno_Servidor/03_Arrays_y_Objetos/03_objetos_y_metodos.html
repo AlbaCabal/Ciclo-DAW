@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Objetos, Métodos y Pintado en DOM</title>
+</head>
+<body>
+    <section>
+        <h3>Tarjeta de Perfil desde Objeto (Ejercicio 5)</h3>
+        <div id="tarjeta-perfil" style="border: 1px solid #ccc; padding: 15px; width: 300px;">
+            <p>Nombre: <span id="perfil-nombre">...</span></p>
+            <p>Edad: <span id="perfil-edad">...</span></p>
+            <p>Ciudad: <span id="perfil-ciudad">...</span></p>
+            <p>Hobbies: <span id="perfil-hobbies">...</span></p>
+        </div>
+        <br>
+        <button id="btn-mostrar-perfil">Mostrar Datos del Perfil</button>
+    </section>
+
+    <script>
+        // 1. Creación, modificación y métodos de objetos (Consola)
+        const estudiante = { nombre: "Laura", edad: 20, curso: "2º DAW" };
+        console.log(`Nombre: ${estudiante.nombre}. Edad: ${estudiante.edad}. Curso: ${estudiante.curso}.`);
+
+        const cuenta = { username: "jgarcia", email: "jgarcia@gmail.com", activo: false };
+        cuenta.activo = true; // Modificar propiedad
+        cuenta.rol = "Administrador"; // Añadir propiedad
+        console.log("Cuenta actualizada:", cuenta);
+
+        const coche = {
+            marca: "Toyota",
+            modelo: "Corolla",
+            arrancar: function () {
+                return `El coche ${this.marca} ${this.modelo} ha arrancado correctamente`;
+            }
+        };
+        console.log(coche.arrancar());
+
+        // 2. Volcar objeto al DOM (Ejercicio 5 corregido)
+        const usuario = {
+            nombre: "Ana García",
+            edad: 28,
+            ciudad: "Valencia",
+            hobbies: ["Leer", "Senderismo", "Fotografía"]
+        };
+
+        function rellenarPerfil() {
+            document.getElementById("perfil-nombre").textContent = usuario.nombre;
+            document.getElementById("perfil-edad").textContent = usuario.edad;
+            document.getElementById("perfil-ciudad").textContent = usuario.ciudad;
+            document.getElementById("perfil-hobbies").textContent = usuario.hobbies.join(", ");
+        }
+
+        document.getElementById("btn-mostrar-perfil").addEventListener("click", rellenarPerfil);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Recorrer las claves de un objeto dinámicamente con Object.entries
+           -------------------------------------------------------------------------
+           Object.entries(usuario).forEach(([clave, valor]) => {
+               console.log(`${clave}: ${valor}`);
+           });
+        */
+    </script>
+</body>
+</html>

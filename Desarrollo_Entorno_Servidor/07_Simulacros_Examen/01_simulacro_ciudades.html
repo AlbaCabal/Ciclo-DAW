@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro 1 - Gestión de Ciudades</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .error { color: red; font-size: 0.9em; }
+        .tarjeta-ciudad { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Información de ciudades</h1>
+    <form id="formCiudades">
+        <label for="ciudad">Ciudad: </label>
+        <input type="text" id="ciudad" name="ciudad" placeholder="Nombre de la ciudad">
+        <span id="err-ciudad" class="error"></span>
+        <br><br>
+
+        <label for="cp">Código Postal:</label>
+        <input type="text" id="cp" name="cp" placeholder="Código postal">
+        <span id="err-cp" class="error"></span>
+        <br><br>
+
+        <label for="habitantes">Habitantes:</label>
+        <input type="text" id="habitantes" name="habitantes" placeholder="Número de habitantes">
+        <span id="err-habitantes" class="error"></span>
+        <br><br>
+
+        <button type="submit">Añadir Ciudad</button>
+    </form>
+
+    <div id="mensaje-errores" class="error"></div>
+    <br>
+    <button id="calcula_estadisticas">Calcular Estadísticas</button>
+
+    <h2>Filtrar y eliminar</h2>
+    <label for="filtro-habitantes">Habitantes mínimos:</label>
+    <input type="text" id="filtro-habitantes" placeholder="Ej: 50000">
+    <button type="button" id="btn-filtrar">Filtrar</button>
+    <button type="button" id="btn-quitar-filtro">Quitar filtro</button>
+    <span id="err-filtro" class="error"></span>
+    <br><br>
+    <label for="ciudad-eliminar">Eliminar ciudad por nombre:</label>
+    <input type="text" id="ciudad-eliminar" placeholder="Nombre de la ciudad">
+    <button type="button" id="btn-eliminar">Eliminar</button>
+    <span id="err-eliminar" class="error"></span>
+
+    <h2>Listado de ciudades:</h2>
+    <div id="listaCiudades"></div>
+    <div id="estadisticas"></div>
+
+    <script src="01_simulacro_ciudades.js"></script>
+</body>
+</html>

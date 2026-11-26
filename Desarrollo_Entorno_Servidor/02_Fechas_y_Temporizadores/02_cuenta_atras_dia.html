@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuenta atrás y Día de la Semana</title>
+</head>
+<body>
+    <p id="mensaje">Esperando 5 segundos para mostrar el día...</p>
+
+    <script>
+        let segundosQuedan = 5;
+        let mensajeIntervalo;
+
+        function imprimirDia() {
+            clearInterval(mensajeIntervalo);
+            const fecha = new Date();
+            const hoy = fecha.getDay(); // 0 = Domingo, 1 = Lunes...
+            const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+            document.getElementById("mensaje").innerHTML = "Hoy es: " + dias[hoy];
+        }
+
+        function segundos() {
+            document.getElementById("mensaje").innerHTML = "Esperando " + segundosQuedan + " segundos para mostrar el día...";
+            segundosQuedan--;
+        }
+
+        segundos();
+        mensajeIntervalo = setInterval(segundos, 1000);
+        setTimeout(imprimirDia, 5000);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Obtener el nombre del día directamente con Intl / toLocaleDateString
+           -------------------------------------------------------------------------
+           // const nombreDia = new Date().toLocaleDateString('es-ES', { weekday: 'long' });
+        */
+    </script>
+</body>
+</html>

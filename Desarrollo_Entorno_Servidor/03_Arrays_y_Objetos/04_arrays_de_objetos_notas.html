@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays de Objetos: Notas y Agrupación</title>
+</head>
+<body>
+    <h1>Medias y Notas Aprobadas (Ejercicios 8, 9 y 10)</h1>
+    <h3>Medias de alumnos:</h3>
+    <ul id="alumnos-lista"></ul>
+
+    <h3>Notas aprobadas (>= 5):</h3>
+    <ul id="alumnos-aprobados"></ul>
+
+    <script>
+        const alumnos = [
+            { nombre: "Ana", notas: [5, 8, 7, 7] },
+            { nombre: "Luis", notas: [10, 3, 3, 8] },
+            { nombre: "Marta", notas: [4, 6, 0, 5] },
+            { nombre: "Pedro", notas: [7, 3, 7, 8] }
+        ];
+
+        function sacarMedia(notas) {
+            return notas.reduce((acc, nota) => acc + nota, 0) / notas.length;
+        }
+
+        // 1. Pintar media con forEach (Ejercicio 10)
+        const alumnosLista = document.getElementById("alumnos-lista");
+        alumnos.forEach(alumno => {
+            const media = sacarMedia(alumno.notas);
+            const li = document.createElement("li");
+            li.textContent = `La media de ${alumno.nombre} es ${media.toFixed(2)}`;
+            alumnosLista.appendChild(li);
+        });
+
+        // 2. Filtrar notas aprobadas con for...of y filter (Ejercicio 9)
+        const alumnosAprobados = document.getElementById("alumnos-aprobados");
+        for (let alumno of alumnos) {
+            const aprobadas = alumno.notas.filter(nota => nota >= 5);
+            const li = document.createElement("li");
+            li.textContent = `Notas aprobadas de ${alumno.nombre}: ${aprobadas.join(", ")}`;
+            alumnosAprobados.appendChild(li);
+        }
+
+        // 3. Agrupar objetos por propiedad usando reduce (Consola)
+        const estudiantes = [
+            { nombre: "Marcos", curso: "2º DAW" },
+            { nombre: "Sara", curso: "1º DAW" },
+            { nombre: "Javier", curso: "2º DAW" },
+            { nombre: "Alba", curso: "1º DAW" },
+            { nombre: "Sofia", curso: "2º DAW" }
+        ];
+
+        const alumnosPorCurso = estudiantes.reduce((acc, estudiante) => {
+            const curso = estudiante.curso;
+            if (!acc[curso]) {
+                acc[curso] = [];
+            }
+            acc[curso].push(estudiante.nombre);
+            return acc;
+        }, {});
+
+        console.log("Agrupados por curso:", alumnosPorCurso);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA (Ejercicio 8): Trabajar con matriz bidimensional en vez de objetos
+           -------------------------------------------------------------------------
+           const alumnosMatriz = [ ["Ana", 5, 6, 7, 7], ["Luis", 10, 8, 9, 8] ];
+           for (let fila of alumnosMatriz) {
+               const nombre = fila[0];
+               const notas = fila.slice(1); // Coge desde índice 1 hasta el final
+               console.log(nombre, sacarMedia(notas));
+           }
+        */
+    </script>
+</body>
+</html>

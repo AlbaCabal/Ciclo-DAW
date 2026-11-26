@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos de Ratón y Teclado</title>
+</head>
+<body>
+    <section>
+        <h3>1. Eventos de ratón (mouseover / mouseout)</h3>
+        <p id="cambioColor" style="padding: 10px; border: 1px solid #ccc;">
+            Pasa el ratón por encima para cambiar de color
+        </p>
+    </section>
+
+    <hr>
+
+    <section>
+        <h3>2. Validador en Tiempo Real (keyup, focus, blur)</h3>
+        <label for="nombre-usuario">Nombre de usuario (mín. 5 caracteres): </label><br>
+        <input type="text" id="nombre-usuario" placeholder="Escribe aquí...">
+        <p id="feedback-usuario"></p>
+    </section>
+
+    <script>
+        // 1. Eventos de ratón
+        const cambioColor = document.getElementById('cambioColor');
+        cambioColor.addEventListener('mouseover', fCambiarColor);
+        cambioColor.addEventListener('mouseout', fVolverColor);
+
+        function fCambiarColor() {
+            cambioColor.style.background = "lightblue";
+        }
+
+        function fVolverColor() {
+            cambioColor.style.background = "white";
+        }
+
+        // 2. Eventos de teclado y foco
+        const nombreUsuario = document.getElementById("nombre-usuario");
+        const feedbackUsuario = document.getElementById("feedback-usuario");
+
+        nombreUsuario.addEventListener("keyup", function () {
+            if (this.value.length < 5) {
+                feedbackUsuario.textContent = "Necesitas al menos 5 caracteres";
+                feedbackUsuario.style.color = "red";
+            } else {
+                feedbackUsuario.textContent = "¡Éxito!";
+                feedbackUsuario.style.color = "green";
+            }
+        });
+
+        nombreUsuario.addEventListener("focus", function () {
+            this.style.border = "2px solid blue";
+        });
+
+        nombreUsuario.addEventListener("blur", function () {
+            this.style.border = "1px solid black";
+        });
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Usar evento 'input' (detecta también pegar con ratón) y e.target
+           -------------------------------------------------------------------------
+           nombreUsuario.addEventListener("input", (e) => {
+               const texto = e.target.value;
+               feedbackUsuario.textContent = texto.length < 5 ? "Faltan caracteres" : "Correcto";
+           });
+        */
+    </script>
+</body>
+</html>

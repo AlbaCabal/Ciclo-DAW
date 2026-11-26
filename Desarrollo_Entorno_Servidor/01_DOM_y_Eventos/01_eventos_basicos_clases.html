@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos Básicos, Clases y Acordeón</title>
+    <style>
+        .caja { border: 1px solid #333; padding: 15px; margin: 15px 0; }
+        .oculto { display: none; }
+        .rojo { color: red; }
+        .tamanyo { font-size: 2rem; }
+        .subrayar { background-color: yellow; text-transform: uppercase; }
+        
+        /* Estilos para el desplegable tipo acordeón */
+        #titulo { cursor: pointer; background: #eee; padding: 10px; }
+        #respuesta { display: none; padding: 10px; border: 1px solid #eee; }
+        #respuesta.mostrar { display: block; }
+    </style>
+</head>
+<body>
+    <h2>Manipulación de clases y estilos</h2>
+    <button id="botonOcultar">Mostrar / Ocultar caja</button>
+    <button id="botonRojo">Cambiar color a Rojo</button>
+    <button id="botonTamanyo">Cambiar Tamaño</button>
+    <button id="botonSubrayar">Subrayar</button>
+
+    <div id="miCaja" class="caja">
+        <strong>¡Haz click aquí!</strong> Este es el contenedor Caja.
+        Esto es una línea sin nada.
+        Esto se va a subrayar: <span id="subrayar">Subrayado</span>
+    </div>
+
+    <hr>
+
+    <h2>Desplegable tipo acordeón</h2>
+    <h3 id="titulo">Pregunta 1: ¿Qué es el DOM? (Pulsa aquí)</h3>
+    <div id="respuesta">Esta es la explicación de la pregunta sobre el DOM.</div>
+
+    <script>
+        // Versión moderna con addEventListener y classList.toggle (Ejemplos 3, 4 y 6 corregidos)
+        function mostrarOcultarCaja() {
+            const caja = document.getElementById('miCaja');
+            caja.classList.toggle("oculto");
+        }
+
+        function cambiarColor() {
+            const caja = document.getElementById('miCaja');
+            caja.classList.toggle("rojo");
+        }
+
+        function cambiarTamanyo() {
+            const caja = document.getElementById('miCaja');
+            caja.classList.toggle("tamanyo");
+        }
+
+        function subrayar() {
+            const texto = document.getElementById('subrayar');
+            texto.classList.toggle("subrayar");
+        }
+
+        document.getElementById('botonOcultar').addEventListener('click', mostrarOcultarCaja);
+        document.getElementById('botonRojo').addEventListener('click', cambiarColor);
+        document.getElementById('botonTamanyo').addEventListener('click', cambiarTamanyo);
+        document.getElementById('botonSubrayar').addEventListener('click', subrayar);
+
+        // Acordeón
+        const respuesta = document.getElementById('respuesta');
+        const titulo = document.getElementById('titulo');
+        titulo.addEventListener('click', function () {
+            respuesta.classList.toggle("mostrar");
+        });
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA (Ejemplos 1 y 2): Eventos inline con onclick y style.display
+           -------------------------------------------------------------------------
+           HTML: <button onclick="mostrarOcultarCajaInline()">Mostrar / Ocultar</button>
+
+           function mostrarOcultarCajaInline() {
+               var caja = document.getElementById('miCaja');
+               if (caja.style.display === "none") {
+                   caja.style.display = "block";
+               } else {
+                   caja.style.display = "none";
+               }
+           }
+        */
+    </script>
+</body>
+</html>

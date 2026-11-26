@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica: Gestión de Inventario de Tienda</title>
+</head>
+<body>
+    <section>
+        <h1>Gestión de Inventario de Tienda</h1>
+        <p>Registrar producto</p>
+        <input type="text" id="nombre-producto" placeholder="Nombre del producto">
+        <input type="text" id="categoria-producto" placeholder="Categoría del producto">
+        <input type="number" id="precio-producto" step="0.01" placeholder="Precio del producto">
+        <button id="btn-anadir">Añadir producto</button><br><br>
+
+        <input type="text" id="nombre-producto-eliminar" placeholder="Nombre del producto a eliminar">
+        <button id="btn-eliminar-nombre">Eliminar producto por nombre</button><br><br>
+
+        <input type="number" id="filtrar-precio" step="0.01" placeholder="Precio mínimo a filtrar">
+        <button id="btn-filtrar-precio">Filtrar por precio</button>
+        <button id="btn-limpiar-filtro">Limpiar filtro</button>
+        <hr>
+
+        <h3>Productos:</h3>
+        <ul id="lista-productos"></ul>
+        <p><strong id="valor-total"></strong></p>
+    </section>
+
+    <script>
+        function Producto(nombre, categoria, precio) {
+            this.nombre = nombre;
+            this.categoria = categoria;
+            this.precio = parseFloat(precio) || 0;
+            this.mostrarProducto = function () {
+                return `Producto: ${this.nombre} [Categoría: ${this.categoria} | Precio: ${this.precio.toFixed(2)} €]`;
+            };
+        }
+
+        const CLAVE_STORAGE = "almacen-local";
+        let almacen = [];
+
+        // Referencias al DOM
+        const btnAnadirProducto = document.getElementById("btn-anadir");
+        const btnEliminarProducto = document.getElementById("btn-eliminar-nombre");
+        const btnFiltrar = document.getElementById("btn-filtrar-precio");
+        const btnLimpiarFiltro = document.getElementById("btn-limpiar-filtro");
+        const listaProductos = document.getElementById("lista-productos");
+        const pValorTotal = document.getElementById("valor-total");
+
+        function renderizarAlmacen(objetosMostrar) {
+            listaProductos.innerHTML = "";
+            objetosMostrar.forEach(function (producto) {
+                const li = document.createElement("li");
+                li.textContent = producto.mostrarProducto();
+                listaProductos.appendChild(li);
+            });
+            calcularValor(objetosMostrar);
+        }
+
+        function guardarAlmacen() {
+            sessionStorage.setItem(CLAVE_STORAGE, JSON.stringify(almacen));
+        }
+
+        function obtenerAlmacen() {
+            const almacenString = sessionStorage.getItem(CLAVE_STORAGE);
+            if (almacenString) {
+                const almacenPlano = JSON.parse(almacenString);
+                return almacenPlano.map(p => new Producto(p.nombre, p.categoria, p.precio));
+            }
+            return [];
+        }
+
+        // AÑADIR PRODUCTO
+        btnAnadirProducto.addEventListener("click", function () {
+            const inputNombre = document.getElementById("nombre-producto");
+            const inputCategoria = document.getElementById("categoria-producto");
+            const inputPrecio = document.getElementById("precio-producto");
+
+            const nombre = inputNombre.value.trim();
+            const categoria = inputCategoria.value.trim();
+            const precio = inputPrecio.value.trim();
+
+            if (nombre && precio) {
+                almacen = obtenerAlmacen();
+                const nuevoProducto = new Producto(nombre, categoria, precio);
+                almacen.push(nuevoProducto);
+                guardarAlmacen();
+
+                // Corregido: limpiar también inputCategoria
+                inputNombre.value = "";
+                inputCategoria.value = "";
+                inputPrecio.value = "";
+
+                renderizarAlmacen(almacen);
+            }
+        });
+
+        // ELIMINAR PRODUCTO
+        btnEliminarProducto.addEventListener("click", function () {
+            const inputEliminar = document.getElementById("nombre-producto-eliminar");
+            const nombreEliminar = inputEliminar.value.trim();
+
+            almacen = obtenerAlmacen();
+            almacen = almacen.filter(prod => prod.nombre.toLowerCase() !== nombreEliminar.toLowerCase());
+            guardarAlmacen();
+            inputEliminar.value = "";
+            renderizarAlmacen(almacen);
+        });
+
+        // CALCULAR VALOR TOTAL
+        function calcularValor(objetosMostrados) {
+            if (!objetosMostrados || objetosMostrados.length === 0) {
+                pValorTotal.innerHTML = "Coste total del inventario: 0.00 €";
+                return;
+            }
+            const valorTotal = objetosMostrados.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+            pValorTotal.innerHTML = `Coste total del inventario: ${valorTotal.toFixed(2)} €`;
+        }
+
+        // FILTRAR POR PRECIO
+        btnFiltrar.addEventListener("click", function () {
+            const precioFiltroNum = parseFloat(document.getElementById("filtrar-precio").value.trim());
+            if (!isNaN(precioFiltroNum)) {
+                almacen = obtenerAlmacen();
+                const buscados = almacen.filter(producto => producto.precio >= precioFiltroNum);
+                renderizarAlmacen(buscados);
+            }
+        });
+
+        btnLimpiarFiltro.addEventListener("click", function () {
+            document.getElementById("filtrar-precio").value = "";
+            almacen = obtenerAlmacen();
+            renderizarAlmacen(almacen);
+        });
+
+        // Inicializar
+        almacen = obtenerAlmacen();
+        renderizarAlmacen(almacen);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Buscar un producto concreto con .find() en lugar de filtrar todos
+           -------------------------------------------------------------------------
+           // const encontrado = almacen.find(p => p.nombre.toLowerCase() === "teclado");
+        */
+    </script>
+</body>
+</html>

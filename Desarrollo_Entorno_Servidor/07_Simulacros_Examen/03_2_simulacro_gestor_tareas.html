@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacro 3 - Gestor de Tareas</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .error { color: red; font-size: 0.9em; }
+        .ok { color: green; font-weight: bold; }
+        .tarea { border: 1px solid #ccc; padding: 10px; margin: 8px 0; border-radius: 5px; }
+        .tarea.prioritaria { border-left: 5px solid orange; background-color: #fffdf5; }
+    </style>
+</head>
+<body>
+<main class="contenedor">
+    <h1>Gestor de tareas</h1>
+
+    <section class="formulario">
+        <h2>Añadir nueva tarea</h2>
+        <form id="form-tarea" name="form-tarea">
+            <div class="campo">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" placeholder="Introduce el título de la tarea">
+                <div id="err-titulo" class="error"></div>
+            </div><br>
+
+            <div class="campo">
+                <label for="descripcion">Descripción: </label>
+                <textarea id="descripcion" name="descripcion" placeholder="Describe la tarea"></textarea>
+                <div id="err-descripcion" class="error"></div>
+            </div><br>
+
+            <div class="campo">
+                <label for="fecha">Fecha límite:</label>
+                <input type="date" id="fecha" name="fecha">
+                <div id="err-fecha" class="error"></div>
+            </div><br>
+
+            <div class="campo">
+                <label for="persona">Asignar a:</label>
+                <select id="persona" name="persona">
+                    <option value="">Selecciona una persona</option>
+                    <option value="Alba">Alba</option>
+                    <option value="Carlos">Carlos</option>
+                    <option value="Laura">Laura</option>
+                    <option value="Pedro">Pedro</option>
+                </select>
+                <div id="err-persona" class="error"></div>
+            </div><br>
+
+            <div class="campo prioridad">
+                <input type="checkbox" id="prioritaria" name="prioritaria">
+                <label for="prioritaria">Tarea prioritaria</label>
+            </div><br>
+
+            <button type="submit" id="btn-anadir">Añadir tarea</button>
+            <div id="mensaje" class="mensaje"></div>
+        </form>
+    </section>
+
+    <section class="eliminar">
+        <h2>Eliminar tarea por título</h2>
+        <div class="campo">
+            <label for="titulo-eliminar">Título de la tarea: </label>
+            <input type="text" id="titulo-eliminar" name="titulo-eliminar" placeholder="Introduce el título">
+            <div id="err-eliminar" class="error"></div>
+        </div><br>
+        <button type="button" id="btn-eliminar">Eliminar tarea</button>
+    </section>
+
+    <section class="filtros">
+        <h2>Filtrar tareas</h2>
+        <label for="filtro-prioridad">Mostrar:</label>
+        <select id="filtro-prioridad" name="filtro-prioridad">
+            <option value="todas">Todas</option>
+            <option value="true">Prioritarias</option>
+            <option value="false">No prioritarias</option>
+        </select>
+    </section>
+
+    <section class="listado">
+        <h2>Lista de tareas</h2>
+        <p id="contador-tareas">Tareas: 0</p>
+        <div id="lista-tareas"></div>
+    </section>
+</main>
+
+<script src="03_2_simulacro_gestor_tareas.js"></script>
+</body>
+</html>

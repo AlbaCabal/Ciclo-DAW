@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays Básicos, Manipulación y Búsqueda</title>
+</head>
+<body>
+    <h1>Arrays Básicos (Revisa la consola F12)</h1>
+    <button id="btn-dias">Mostrar Días de la Semana en HTML</button>
+    <ul id="lista-dias"></ul>
+
+    <script>
+        // 1. Acceso e índices
+        const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+        console.log("Primero:", dias[0]);
+        console.log("Último:", dias[dias.length - 1]);
+        let indiceMedio = parseInt(dias.length / 2);
+        console.log("Medio en mayúsculas:", dias[indiceMedio].toUpperCase());
+
+        // 2. Manipulación: push (final), unshift (principio), pop (quita final)
+        const cola = ["Ana", "Carlos", "Elena"];
+        cola.push("David");
+        cola.unshift("Beatriz");
+        cola.pop();
+        console.log("Cola resultante:", cola);
+
+        // 3. Extracción inmutable con slice (no modifica el original)
+        const numeros = [10, 20, 30, 40, 50, 60];
+        const subArray = numeros.slice(1, 4); // índices 1, 2 y 3 -> [20, 30, 40]
+        console.log("Original:", numeros, "SubArray:", subArray);
+
+        // 4. Búsqueda con includes e indexOf
+        const frutas = ["Manzana", "Plátano", "Naranja", "Fresa"];
+        console.log("¿Existe Plátano?:", frutas.includes("Plátano"));
+        console.log("Posición Naranja:", frutas.indexOf("Naranja"));
+        console.log("Posición Uva (no existe):", frutas.indexOf("Uva")); // -1
+
+        // 5. Pintar array en el DOM (Ejercicio 2 corregido)
+        const arrayDias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+        const btnDias = document.getElementById('btn-dias');
+        const listaDias = document.getElementById('lista-dias');
+
+        btnDias.addEventListener('click', function () {
+            listaDias.innerHTML = "";
+            for (let i = 0; i < arrayDias.length; i++) {
+                listaDias.innerHTML += `<li>${arrayDias[i]}</li>`;
+            }
+        });
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA para pintar la lista usando createElement + forEach
+           -------------------------------------------------------------------------
+           arrayDias.forEach(dia => {
+               const li = document.createElement("li");
+               li.textContent = dia;
+               listaDias.appendChild(li);
+           });
+        */
+    </script>
+</body>
+</html>

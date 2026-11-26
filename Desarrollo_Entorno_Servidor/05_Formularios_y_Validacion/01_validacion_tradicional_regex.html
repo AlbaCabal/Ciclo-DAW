@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación Tradicional con RegEx y try/catch</title>
+    <style>
+        .error { color: red; font-weight: bold; }
+        .ok { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Validación de campos con RegEx y try / catch</h1>
+    <form id="edadForm">
+        <label for="nombre">Nombre (mín. 3 caracteres):</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="edad">Edad (entero positivo):</label>
+        <input type="text" id="edad" name="edad"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <button type="submit" id="submit">Enviar</button>
+    </form>
+    <p id="mensajeError"></p>
+
+    <script>
+        const formEdad = document.getElementById("edadForm");
+
+        function validarNombre(nombre) {
+            if (nombre === "") {
+                throw new Error("El campo nombre no puede estar vacío");
+            }
+            // Corregido: antes ponía nombre.length > 3
+            if (nombre.length < 3) {
+                throw new Error("El campo nombre tiene que tener al menos 3 caracteres");
+            }
+            return true;
+        }
+
+        function validarEdad(edad) {
+            if (edad === '') {
+                throw new Error("ERROR: El campo edad no puede estar vacío");
+            }
+            // Verifica número entero positivo (sin decimales ni negativos)
+            if (!/^[1-9]\d*$/.test(edad)) {
+                throw new Error("ERROR: La edad debe ser un número entero positivo");
+            }
+            return true;
+        }
+
+        function validarEmail(email) {
+            if (email === "") {
+                throw new Error("El campo email no puede estar vacío");
+            }
+            if (!/^\w+([-.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)$/.test(email)) {
+                throw new Error("ERROR: No es un correo válido");
+            }
+            return true;
+        }
+
+        formEdad.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const inputNombre = document.getElementById("nombre").value.trim();
+            const inputEdad = document.getElementById("edad").value.trim();
+            const inputEmail = document.getElementById("email").value.trim();
+            const mensajeError = document.getElementById("mensajeError");
+
+            const errores = [];
+
+            try { validarNombre(inputNombre); } catch (error) { errores.push(error); }
+            try { validarEdad(inputEdad); } catch (error) { errores.push(error); }
+            try { validarEmail(inputEmail); } catch (error) { errores.push(error); }
+
+            if (errores.length > 0) {
+                // Corregido: la propiedad nativa de Error es .message (no .mensaje)
+                mensajeError.innerHTML = errores.map(err => err.message).join("<br>");
+                mensajeError.className = "error";
+            } else {
+                mensajeError.textContent = "CORRECTO: Todos los campos son válidos.";
+                mensajeError.className = "ok";
+            }
+        });
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Validación directa con if / return sin lanzar excepciones (throw)
+           -------------------------------------------------------------------------
+           if (inputEdad === "" || isNaN(inputEdad)) {
+               mensajeError.textContent = "Edad no válida";
+               return;
+           }
+        */
+    </script>
+</body>
+</html>

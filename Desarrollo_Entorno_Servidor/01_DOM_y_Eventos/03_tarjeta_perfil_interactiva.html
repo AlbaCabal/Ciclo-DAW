@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Perfil Interactiva</title>
+    <style>
+        #tarjeta-perfil { border: 1px solid #333; padding: 20px; width: 300px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div id="tarjeta-perfil">
+        <img id="foto-perfil" src="icono-perfil.png" alt="Foto de perfil" width="128">
+        <h2 id="nombre-usuario">Juan Pérez</h2>
+        <p id="descripcion-usuario">Esta es la descripción del perfil de usuario.</p>
+    </div>
+
+    <div>
+        <button id="boton-datos">Cambiar datos</button>
+        <button id="boton-imagen">Cambiar imagen</button>
+        <button id="boton-tema">Cambiar tema</button>
+        <button id="boton-todo">Cambiar todo</button>
+    </div>
+
+    <script>
+        // Versión con arrays y número aleatorio sin repetir el anterior
+        let anterior = -1;
+
+        function numRandom(max) {
+            let random;
+            do {
+                random = Math.floor(Math.random() * max);
+            } while (random === anterior);
+            anterior = random;
+            return random;
+        }
+
+        function cambiarDatos() {
+            const nombre = document.getElementById('nombre-usuario');
+            const descripcion = document.getElementById('descripcion-usuario');
+            const arrayNombres = ["Juan Perez", "Alba Caballero", "Mario Bru", "Alex Vera", "Pilar Gomez", "Carla Rodriguez", "Pablo Casas"];
+            const arrayDescripcion = ["Profesor de Secundaria", "Estudiante de FP", "Analista de datos", "Cartero", "Funcionaria", "Entrenadora", "Fisio"];
+
+            let random = numRandom(arrayNombres.length);
+            nombre.innerHTML = arrayNombres[random];
+            descripcion.innerHTML = arrayDescripcion[random];
+            console.log("Datos del perfil actualizados.");
+        }
+
+        function cambiarImagen() {
+            const imagen = document.getElementById('foto-perfil');
+            const arrayImagen = ["img/hombre1.jpg", "img/mujer1.jpg", "img/hombre2.jpg", "img/hombre3.webp", "img/mujer2.jpg", "img/mujer3.jpg", "img/hombre4.jpg"];
+            let random = numRandom(arrayImagen.length);
+            imagen.src = arrayImagen[random];
+            console.log("Imagen del perfil actualizada");
+        }
+
+        function cambiarTema() {
+            const tarjeta = document.getElementById('tarjeta-perfil');
+            const nombre = document.getElementById('nombre-usuario');
+            const arrayFondo = ["lightgreen", "lightpink", "lightgoldenrodyellow", "lightblue", "lightsalmon", "lightgray"];
+            const arrayColor = ["purple", "red", "orange", "green", "saddlebrown", "black"];
+
+            let random = numRandom(arrayFondo.length);
+            nombre.style.background = arrayFondo[random];
+            nombre.style.color = arrayColor[random];
+            tarjeta.style.background = arrayFondo[random];
+            tarjeta.style.color = arrayColor[random];
+            alert("El tema de color ha cambiado");
+        }
+
+        function cambiarTodo() {
+            cambiarDatos();
+            cambiarImagen();
+            cambiarTema();
+        }
+
+        document.getElementById('boton-datos').addEventListener('click', cambiarDatos);
+        document.getElementById('boton-imagen').addEventListener('click', cambiarImagen);
+        document.getElementById('boton-tema').addEventListener('click', cambiarTema);
+        document.getElementById('boton-todo').addEventListener('click', cambiarTodo);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA (Versión básica de alternancia if/else sin arrays)
+           -------------------------------------------------------------------------
+           function cambiarDatosBasico() {
+               const nombre = document.getElementById('nombre-usuario');
+               const descripcion = document.getElementById('descripcion-usuario');
+               if (nombre.innerHTML === "Juan Pérez") {
+                   nombre.innerHTML = "Alba Vera Caballero";
+                   descripcion.innerHTML = "ESTUDIANTE DE 2º DAW";
+               } else {
+                   nombre.innerHTML = "Juan Pérez";
+                   descripcion.innerHTML = "Esta es la descripción del perfil de usuario.";
+               }
+           }
+        */
+    </script>
+</body>
+</html>

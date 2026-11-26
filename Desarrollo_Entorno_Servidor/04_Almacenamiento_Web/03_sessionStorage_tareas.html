@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tareas con sessionStorage</title>
+</head>
+<body>
+    <section>
+        <h2>Lista de Tareas Interactiva (sessionStorage + Constructor)</h2>
+        <input type="text" id="nombre-tarea" placeholder="Nombre de la nueva tarea">
+        <input type="text" id="prioridad-tarea" placeholder="Prioridad (Alta/Media/Baja)">
+        <button id="btn-anadir">Añadir</button>
+        <hr>
+        <button id="btn-eliminar-ultima">Eliminar Última</button>
+        <button id="btn-ordenar">Ordenar Alfabéticamente</button>
+
+        <h3>Mis Tareas:</h3>
+        <ul id="lista-tareas"></ul>
+    </section>
+
+    <script>
+        // Función constructora (alternativa clásica a 'class')
+        function Tarea(nombre, prioridad) {
+            this.nombre = nombre;
+            this.prioridad = prioridad;
+            this.mostrarTarea = function () {
+                return `${this.nombre} - Prioridad: ${this.prioridad}`;
+            };
+        }
+
+        const CLAVE_STORAGE = "tareas_session";
+        let tareas = [];
+        const lista = document.getElementById("lista-tareas");
+
+        function guardarTareas() {
+            sessionStorage.setItem(CLAVE_STORAGE, JSON.stringify(tareas));
+        }
+
+        function obtenerTareas() {
+            const tareasString = sessionStorage.getItem(CLAVE_STORAGE);
+            if (tareasString) {
+                const tareasPlanas = JSON.parse(tareasString);
+                // Revivimos cada objeto plano para recuperar el método mostrarTarea()
+                return tareasPlanas.map(t => new Tarea(t.nombre, t.prioridad));
+            }
+            return [];
+        }
+
+        function renderizarTareas() {
+            lista.innerHTML = "";
+            tareas = obtenerTareas();
+            tareas.forEach(function (tarea) {
+                const li = document.createElement("li");
+                li.textContent = tarea.mostrarTarea();
+                lista.appendChild(li);
+            });
+        }
+
+        // Añadir tarea
+        document.getElementById("btn-anadir").addEventListener("click", function () {
+            const nombre = document.getElementById("nombre-tarea").value.trim();
+            const prioridad = document.getElementById("prioridad-tarea").value.trim() || "Normal";
+
+            if (nombre) {
+                tareas = obtenerTareas();
+                const tareaNueva = new Tarea(nombre, prioridad);
+                tareas.push(tareaNueva);
+                guardarTareas();
+
+                document.getElementById("nombre-tarea").value = "";
+                document.getElementById("prioridad-tarea").value = "";
+                renderizarTareas();
+            }
+        });
+
+        // Eliminar última tarea
+        document.getElementById("btn-eliminar-ultima").addEventListener("click", function () {
+            tareas = obtenerTareas();
+            tareas.pop();
+            guardarTareas();
+            renderizarTareas();
+        });
+
+        // Ordenar alfabéticamente por propiedad 'nombre' (Corregido para objetos)
+        document.getElementById("btn-ordenar").addEventListener("click", function () {
+            tareas = obtenerTareas();
+            tareas.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            guardarTareas();
+            renderizarTareas();
+        });
+
+        // Mostrar las tareas al cargar la página
+        renderizarTareas();
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Si 'tareas' fuera un array simple de strings (sin objetos)
+           -------------------------------------------------------------------------
+           // tareas.sort(); // Ordena strings directamente
+           // tareas.push("Nueva tarea");
+        */
+    </script>
+</body>
+</html>

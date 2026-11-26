@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays Funcionales: map, filter, find, reduce</title>
+</head>
+<body>
+    <h1>Métodos Funcionales de Arrays (Revisa la consola F12)</h1>
+    <p id="salida"></p>
+
+    <script>
+        // --- 1. FILTER (Devuelve un nuevo array con los que cumplen la condición) ---
+        const edades = [12, 25, 17, 18, 30, 15, 40];
+        const mayores = edades.filter(edad => edad >= 18);
+        console.log("Mayores de edad:", mayores);
+
+        const palabras = ["html", "javascript", "css", "desarrollo", "web"];
+        const largas = palabras.filter(p => p.length > 5);
+        console.log("Palabras > 5 letras:", largas);
+
+        const inventario = [
+            { nombre: "Fundas Móvil", precio: 12, stock: 45 },
+            { nombre: "Cargador Carga Rápida", precio: 25, stock: 0 },
+            { nombre: "Auriculares Bluetooth", precio: 45, stock: 12 },
+            { nombre: "Smartwatch Premium", precio: 199, stock: 5 }
+        ];
+        const disponiblesBaratos = inventario.filter(p => p.stock > 0 && p.precio < 50);
+        console.log("Inventario filtrado:", disponiblesBaratos);
+
+        // --- 2. FIND (Devuelve el PRIMER elemento que cumple la condición, o undefined) ---
+        const libros = [
+            { titulo: "El Quijote", disponible: false },
+            { titulo: "Cien años de soledad", disponible: true },
+            { titulo: "1984", disponible: true }
+        ];
+        const primerDisponible = libros.find(libro => libro.disponible === true);
+        console.log("Primer libro disponible:", primerDisponible);
+
+        // --- 3. MAP (Transforma cada elemento y devuelve un array del mismo tamaño) ---
+        const valores = [2, 5, 8, 12];
+        const triples = valores.map(num => num * 3);
+        const conIva = valores.map(num => +(num * 1.21).toFixed(2));
+        console.log("Triples:", triples, "Con IVA:", conIva);
+
+        const usuariosSucios = ["  MARIA ", "JUan  ", " pEdRo", "lucia"];
+        const usuariosLimpios = usuariosSucios.map(nombre => nombre.trim().toUpperCase());
+        console.log("Usuarios limpios:", usuariosLimpios);
+
+        const productos = [
+            { id: 1, nombre: "Teclado Mecánico", precio: 59.99 },
+            { id: 2, nombre: "Ratón Óptico", precio: 25.00 },
+            { id: 3, nombre: "Monitor 24 pulgadas", precio: 149.90 }
+        ];
+        const textosProductos = productos.map(p => `Producto ${p.id}: ${p.nombre} - ${p.precio.toFixed(2)} EUR`);
+        document.getElementById("salida").innerHTML = textosProductos.join("<br>");
+
+        // --- 4. REDUCE (Acumula todos los valores en un único resultado) ---
+        const carrito = [
+            { producto: "Manzanas", precio: 2.50, cantidad: 3 },
+            { producto: "Leche", precio: 1.10, cantidad: 6 },
+            { producto: "Pan", precio: 0.90, cantidad: 2 }
+        ];
+        const totalCarrito = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+        console.log("Total carrito:", totalCarrito.toFixed(2) + " €");
+
+        // Buscar el valor máximo con reduce
+        const puntuaciones = [45, 82, 19, 94, 67];
+        const max = puntuaciones.reduce((acu, num) => (num > acu ? num : acu), puntuaciones[0]);
+        console.log("Puntuación máxima:", max);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA para sacar el máximo sin reduce:
+           -------------------------------------------------------------------------
+           const maxConMath = Math.max(...puntuaciones);
+        */
+    </script>
+</body>
+</html>

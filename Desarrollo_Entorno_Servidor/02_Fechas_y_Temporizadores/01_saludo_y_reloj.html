@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Saludo Dinámico y Reloj con Temporizadores</title>
+</head>
+<body>
+    <h2>Saludo según la hora</h2>
+    <p id="saludo-dinamico"></p>
+
+    <hr>
+
+    <h2>Reloj de Segundos (se detiene a los 5 segundos)</h2>
+    <p id="reloj"></p>
+
+    <script>
+        // 1. Saludo dinámico
+        const saludo = document.getElementById('saludo-dinamico');
+        const horaActualSaludo = new Date().getHours();
+
+        if (horaActualSaludo < 12) {
+            saludo.innerHTML = "Buenos días";
+        } else if (horaActualSaludo < 18) {
+            saludo.innerHTML = "Buenas tardes";
+        } else {
+            saludo.innerHTML = "Buenas noches";
+        }
+
+        // 2. Reloj con setInterval y setTimeout (Corregido)
+        let idIntervalo;
+        let idTimeout;
+
+        function horaActual() {
+            const fechaCompleta = new Date();
+            let hora = fechaCompleta.getHours();
+            if (hora < 10) hora = '0' + hora;
+
+            let minutos = fechaCompleta.getMinutes();
+            if (minutos < 10) minutos = '0' + minutos;
+
+            let segundos = fechaCompleta.getSeconds();
+            if (segundos < 10) segundos = '0' + segundos;
+
+            document.getElementById('reloj').innerHTML = hora + ":" + minutos + ":" + segundos;
+        }
+
+        function pararReloj() {
+            clearInterval(idIntervalo);
+            document.getElementById('reloj').innerHTML += " (FIN)";
+        }
+
+        horaActual(); // Pintar al instante sin esperar el primer segundo
+        idIntervalo = setInterval(horaActual, 1000);
+        idTimeout = setTimeout(pararReloj, 5000);
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Formateo rápido con padStart(2, '0') o toLocaleTimeString()
+           -------------------------------------------------------------------------
+           // Con padStart:
+           // const h = String(fechaCompleta.getHours()).padStart(2, '0');
+           // Con método nativo:
+           // document.getElementById('reloj').textContent = new Date().toLocaleTimeString('es-ES');
+        */
+    </script>
+</body>
+</html>

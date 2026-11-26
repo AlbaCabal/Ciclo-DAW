@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Completo con FormData</title>
+    <style>
+        .error { color: red; font-weight: bold; }
+        .ok { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Formulario FormData (Todos los tipos de inputs)</h1>
+    <form id="form" action="#" method="post">
+        <!-- Input de texto -->
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" name="nombre">
+        <br><br>
+
+        <!-- Textarea -->
+        <label for="comentario">Comentario: </label>
+        <textarea id="comentario" name="comentario"></textarea>
+        <br><br>
+
+        <!-- Radio -->
+        <fieldset>
+            <p>Sexo:</p>
+            <input type="radio" id="hombre" name="sexo" value="hombre">
+            <label for="hombre">Hombre</label>
+            <input type="radio" id="mujer" name="sexo" value="mujer">
+            <label for="mujer">Mujer</label>
+        </fieldset>
+        <br>
+
+        <!-- Checkbox simple -->
+        <input type="checkbox" id="terminos" name="terminos" value="aceptado">
+        <label for="terminos">Acepto los términos y condiciones</label>
+        <br><br>
+
+        <!-- Checkbox múltiple -->
+        <fieldset>
+            <p>Aficiones:</p>
+            <input type="checkbox" id="deporte" name="aficiones" value="deporte">
+            <label for="deporte">Deporte</label>
+            <input type="checkbox" id="musica" name="aficiones" value="musica">
+            <label for="musica">Música</label>
+            <input type="checkbox" id="lectura" name="aficiones" value="lectura">
+            <label for="lectura">Lectura</label>
+        </fieldset>
+        <br>
+
+        <!-- Select simple -->
+        <fieldset>
+            <label for="curso">Curso:</label>
+            <select id="curso" name="curso">
+                <option value="">Selecciona un curso</option>
+                <option value="1">Primero</option>
+                <option value="2">Segundo</option>
+                <option value="3">Tercero</option>
+            </select>
+        </fieldset>
+        <br>
+
+        <!-- Select múltiple -->
+        <fieldset>
+            <label for="lenguajes">Lenguajes de programación: </label>
+            <select id="lenguajes" name="lenguajes" multiple>
+                <option value="java">Java</option>
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="php">PHP</option>
+            </select>
+        </fieldset>
+        <br>
+
+        <button type="submit" name="enviar" value="enviar">Enviar</button>
+    </form>
+
+    <p id="mensajeError"></p>
+
+    <script>
+        const form = document.getElementById("form");
+        const mensajeError = document.getElementById("mensajeError");
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // OJO: FormData usa el atributo 'name' de los inputs, NO el 'id'
+            const data = new FormData(form);
+            const errores = [];
+
+            // 1. Validación de texto (Nombre)
+            if (!(data.get('nombre') || '').trim()) {
+                errores.push("ERROR: El campo nombre no puede estar vacío");
+            }
+
+            // 2. Validación de textarea (Comentario)
+            if (!(data.get('comentario') || '').trim()) {
+                errores.push("ERROR: El campo comentario no puede estar vacío");
+            }
+
+            // 3. Validación de Radio (Sexo)
+            if (!data.get('sexo')) {
+                errores.push("ERROR: El campo sexo no puede estar vacío, elige una de las opciones");
+            }
+
+            // 4. Validación de Checkbox simple (Términos) -> se comprueba con .has()
+            if (!data.has('terminos')) {
+                errores.push("ERROR: Se tienen que aceptar los términos");
+            }
+
+            // 5. Validación de Checkbox múltiple (Aficiones) -> se recoge array con .getAll()
+            if (data.getAll('aficiones').length === 0) {
+                errores.push("ERROR: El campo aficiones no puede estar vacío, elige mínimo una opción");
+            }
+
+            // 6. Validación de Select simple (Curso)
+            if (!data.get('curso')) {
+                errores.push("ERROR: El campo curso no puede estar vacío, elige una opción");
+            }
+
+            // 7. Validación de Select múltiple (Lenguajes) -> se recoge array con .getAll()
+            if (data.getAll('lenguajes').length === 0) {
+                errores.push("ERROR: El campo lenguajes no puede estar vacío, elige mínimo una opción");
+            }
+
+            // Mostrar resultados
+            if (errores.length > 0) {
+                mensajeError.innerHTML = errores.join("<br>");
+                mensajeError.className = "error";
+            } else {
+                mensajeError.innerHTML = "Formulario enviado con éxito.";
+                mensajeError.className = "ok";
+                console.log("Datos recogidos:", Object.fromEntries(data.entries()));
+            }
+        });
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA sin FormData: Recoger checkboxes marcados con querySelectorAll
+           -------------------------------------------------------------------------
+           const marcados = document.querySelectorAll('input[name="aficiones"]:checked');
+           const valoresAficiones = [...marcados].map(cb => cb.value);
+        */
+    </script>
+</body>
+</html>

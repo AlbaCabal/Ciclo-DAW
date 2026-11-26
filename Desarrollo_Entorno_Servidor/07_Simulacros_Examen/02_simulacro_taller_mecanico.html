@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacro 2 - Taller Mecánico</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .error, [id^="err-"] { color: red; font-size: 0.9em; }
+        .ok { color: green; font-weight: bold; }
+        .tarjeta-coche { border: 1px solid #444; padding: 12px; margin: 10px 0; border-radius: 6px; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Taller Mecánico</h1>
+</header>
+<main>
+    <section class="formulario">
+        <h2>Registrar Entrada al Taller</h2>
+        <form id="form" action="#" method="post">
+            <label for="propietario">Propietario</label>
+            <input type="text" id="propietario" name="propietario" placeholder="Nombre completo">
+            <div id="err-propietario"></div><br>
+
+            <label for="matricula">Matrícula</label>
+            <input type="text" id="matricula" name="matricula" placeholder="1234ABC">
+            <div id="err-matricula"></div><br>
+
+            <label for="marca">Marca</label>
+            <select id="marca" name="marca">
+                <option value="">Selecciona la marca...</option>
+                <option value="Toyota">Toyota</option>
+                <option value="BMW">BMW</option>
+                <option value="Ford">Ford</option>
+                <option value="Seat">Seat</option>
+                <option value="Renault">Renault</option>
+                <option value="Otros">Otros</option>
+            </select>
+            <div id="err-marca"></div><br>
+
+            <div id="ocultoOtrosMarca">
+                <label for="especificarMarca">Especifica la marca</label>
+                <input type="text" id="especificarMarca" name="especificarMarca" placeholder="¿Qué marca es?">
+                <div id="err-especificarMarca"></div><br>
+            </div>
+
+            <label>Incidencias detectadas</label>
+            <div id="incidencias">
+                <label><input type="checkbox" name="incidencias" value="Motor"> Motor</label>
+                <label><input type="checkbox" name="incidencias" value="Ruedas"> Ruedas</label>
+                <label><input type="checkbox" name="incidencias" value="General"> General</label>
+                <label><input type="checkbox" name="incidencias" value="Frenos"> Frenos</label>
+                <label><input type="checkbox" name="incidencias" value="Carrocería"> Carrocería</label>
+                <label><input type="checkbox" name="incidencias" value="Otros" id="incidenciasOtros"> Otros...</label>
+            </div>
+            <div id="err-incidencias"></div><br>
+
+            <div id="ocultoOtrosIncidencia">
+                <label for="detalleOtros">Detalle de "Otros"</label>
+                <input type="text" id="detalleOtros" name="detalleOtros" placeholder="¿Cuál es el problema?">
+                <div id="err-detalleOtros"></div><br>
+            </div>
+
+            <button type="submit">Registrar Entrada</button>
+            <div id="mensaje-resultado"></div>
+        </form>
+    </section>
+
+    <section class="bandeja">
+        <div class="titulo-bandeja">
+            <h2>Coches en espera</h2>
+        </div>
+
+        <div id="panel-control">
+            <p>Vehículos en espera: <strong id="total-coches">0</strong></p>
+            <p>Balance económico: <strong id="balance-total">0,00 €</strong></p>
+        </div>
+
+        <div class="contenedores-coches"></div>
+    </section>
+</main>
+
+<dialog id="modal-duplicado">
+    <h2>Matrícula duplicada</h2>
+    <p>Ya existe un vehículo con esta matrícula. ¿Qué quieres hacer?</p>
+    <div>
+        <button type="button" id="descartar">Descartar operación</button>
+        <button type="button" id="sustituir">Sustituir registro</button>
+        <button type="button" id="fusionar">Unir incidencias</button>
+    </div>
+</dialog>
+
+<script src="02_simulacro_taller_mecanico.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Libros - Biblioteca</title>
+</head>
+<body>
+    <h3>Biblioteca:</h3>
+    <ul id="libros"></ul>
+
+    <input type="text" id="titulo-borrar" placeholder="Escribir título a borrar">
+    <button id="btn-eliminar-titulo">Eliminar por Título</button>
+    <br><br>
+
+    <button id="btn-mostrar-biblioteca">Mostrar biblioteca</button>
+    <button id="btn-edad-media">Calcular año medio de publicación</button>
+    <br><br>
+
+    <h4>Nuevo libro:</h4>
+    <input type="text" id="titulo" placeholder="Título">
+    <input type="text" id="autor" placeholder="Autor">
+    <input type="number" id="anyo" placeholder="Año">
+    <input type="text" id="genero" placeholder="Género"><br><br>
+    <button id="btn-anadir-libro">Añadir libro</button>
+
+    <script>
+        function Libro(titulo, autor, anyo, genero) {
+            this.titulo = titulo;
+            this.autor = autor;
+            this.anyo = Number(anyo);
+            this.genero = genero;
+            this.mostrarInfo = function () {
+                return `${this.titulo} - ${this.autor} (${this.anyo}) [${this.genero}]`;
+            };
+        }
+
+        const lista = document.getElementById("libros");
+        let biblioteca = [
+            new Libro("La psicología del dinero", "Morgan Housel", 2010, "Finanzas"),
+            new Libro("Don Quijote de la Mancha", "Miguel de Cervantes", 1605, "Novela"),
+            new Libro("Orgullo y prejuicio", "Jane Austen", 1813, "Novela romántica")
+        ];
+
+        // Corregido: acepta un array opcional (por si se pasa filtrado) o usa biblioteca
+        function mostrarBiblioteca(listaMostrar = biblioteca) {
+            lista.innerHTML = "";
+            for (let libro of listaMostrar) {
+                let li = document.createElement('li');
+                li.textContent = libro.mostrarInfo();
+                lista.appendChild(li);
+            }
+        }
+
+        function anadirLibro() {
+            const titulo = document.getElementById("titulo").value.trim();
+            // Corregido: antes leía de "titulo" en lugar de "autor"
+            const autor = document.getElementById("autor").value.trim();
+            // Corregido: antes faltaba .value en "anyo"
+            const anyo = parseInt(document.getElementById("anyo").value);
+            const genero = document.getElementById("genero").value.trim();
+
+            if (!titulo || !autor || isNaN(anyo)) {
+                alert("Rellena título, autor y año correctamente.");
+                return;
+            }
+
+            let libro = new Libro(titulo, autor, anyo, genero);
+            biblioteca.push(libro);
+
+            document.getElementById("titulo").value = "";
+            document.getElementById("autor").value = "";
+            document.getElementById("anyo").value = "";
+            document.getElementById("genero").value = "";
+
+            mostrarBiblioteca();
+        }
+
+        function eliminarLibro() {
+            // Corregido: antes faltaba .value en "titulo-borrar"
+            let nombre = document.getElementById("titulo-borrar").value.trim();
+            // Corregido: actualizamos el array global 'biblioteca'
+            biblioteca = biblioteca.filter(libro => libro.titulo.toLowerCase() !== nombre.toLowerCase());
+            document.getElementById("titulo-borrar").value = "";
+            mostrarBiblioteca();
+        }
+
+        function calcularEdad() {
+            if (biblioteca.length === 0) {
+                alert("No hay libros en la biblioteca.");
+                return;
+            }
+            const sumaAnyos = biblioteca.reduce((acc, libro) => acc + libro.anyo, 0);
+            let media = (sumaAnyos / biblioteca.length).toFixed(2);
+            console.log("El año medio es: " + media);
+            alert("El año medio de publicación es: " + media);
+        }
+
+        document.getElementById("btn-anadir-libro").addEventListener("click", anadirLibro);
+        document.getElementById("btn-eliminar-titulo").addEventListener("click", eliminarLibro);
+        document.getElementById("btn-mostrar-biblioteca").addEventListener("click", () => mostrarBiblioteca());
+        document.getElementById("btn-edad-media").addEventListener("click", calcularEdad);
+
+        // Renderizado inicial
+        mostrarBiblioteca();
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Calcular edad real de los libros respecto al año actual
+           -------------------------------------------------------------------------
+           const anyoActual = new Date().getFullYear();
+           const edadMediaReal = biblioteca.reduce((acc, l) => acc + (anyoActual - l.anyo), 0) / biblioteca.length;
+        */
+    </script>
+</body>
+</html>

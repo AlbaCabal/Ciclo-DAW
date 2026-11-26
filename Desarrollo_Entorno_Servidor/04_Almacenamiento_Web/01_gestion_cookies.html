@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Cookies</title>
+</head>
+<body>
+    <h1>Gestión de Cookies</h1>
+    <p>Gestión de cookie 'tema' (expires y max-age)</p>
+    <button onclick="crearCookie()">Crear cookie</button>
+    <button onclick="borrarCookie()">Borrar cookie</button>
+    <button onclick="leerCookie()">Leer cookie</button>
+    <p id="mensaje"></p>
+
+    <script>
+        function crearCookie() {
+            // Opción 1: con max-age (en segundos: 30 días)
+            const maxAge = 30 * 24 * 60 * 60;
+            const nombre = "tema";
+            const valor = "oscuro";
+            const valorCodificado = encodeURIComponent(valor);
+
+            document.cookie = `${nombre}=${valorCodificado}; max-age=${maxAge}; path=/`;
+            document.getElementById("mensaje").innerHTML = "Cookie 'tema' creada.";
+        }
+
+        function borrarCookie() {
+            // Para borrar una cookie se pone max-age=0 o una fecha pasada (1970)
+            document.cookie = "tema=; max-age=0; path=/";
+            document.cookie = "tema=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+            document.getElementById("mensaje").innerHTML = "Cookie 'tema' borrada.";
+        }
+
+        function leerCookie() {
+            if (document.cookie) {
+                alert("Cookies actuales: " + document.cookie);
+            } else {
+                alert("No hay cookies guardadas.");
+            }
+        }
+
+        /* -------------------------------------------------------------------------
+           ALTERNATIVA: Crear cookie usando fecha de caducidad 'expires' (toUTCString)
+           -------------------------------------------------------------------------
+           function crearCookieConExpires() {
+               let fechaCaducidad = new Date();
+               fechaCaducidad.setTime(fechaCaducidad.getTime() + (30 * 24 * 60 * 60 * 1000));
+               document.cookie = "usuario=Dimas; expires=" + fechaCaducidad.toUTCString() + "; path=/";
+           }
+        */
+    </script>
+</body>
+</html>

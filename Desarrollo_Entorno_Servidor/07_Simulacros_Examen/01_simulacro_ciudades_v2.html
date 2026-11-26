@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulacro 1 v2 - Gestión de Ciudades (Estadísticas automáticas)</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .error { color: red; font-size: 0.9em; }
+        .tarjeta-ciudad { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        #estadisticas { background: #f4f6f8; padding: 12px; border-radius: 5px; border: 1px solid #ddd; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Información de ciudades</h1>
+    <form id="formCiudades">
+        <label for="ciudad">Ciudad: </label>
+        <input type="text" id="ciudad" name="ciudad" placeholder="Nombre de la ciudad">
+        <span id="err-ciudad" class="error"></span>
+        <br><br>
+
+        <label for="cp">Código Postal:</label>
+        <input type="text" id="cp" name="cp" placeholder="Código postal">
+        <span id="err-cp" class="error"></span>
+        <br><br>
+
+        <label for="habitantes">Habitantes:</label>
+        <input type="text" id="habitantes" name="habitantes" placeholder="Número de habitantes">
+        <span id="err-habitantes" class="error"></span>
+        <br><br>
+
+        <button type="submit">Añadir Ciudad</button>
+    </form>
+
+    <div id="mensaje-errores" class="error"></div>
+
+    <h2>Estadísticas:</h2>
+    <div id="estadisticas"></div>
+
+    <h2>Listado de ciudades:</h2>
+    <div id="listaCiudades"></div>
+
+    <script src="01_simulacro_ciudades_v2.js"></script>
+</body>
+</html>
